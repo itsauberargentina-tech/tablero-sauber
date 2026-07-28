@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tablero Sauber</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; height: 100%; background-color: #000;
+            display: flex; justify-content: center; align-items: center;
+            color: #fff; font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <div>Cargando tableros...</div>
+
+    <script>
+        // URLs directas de Power BI con el parámetro chromeless
+        const urls = [
+            "https://app.powerbi.com/groups/me/reports/6e43669a-6e4c-4c57-8427-65b35dc00e07/117ddc6e19729b3d0d96?experience=power-bi&clientSideAuth=0&chromeless=1",
+            "https://app.powerbi.com/groups/me/reports/6e43669a-6e4c-4c57-8427-65b35dc00e07/882112cc955c6489a28f?experience=power-bi&clientSideAuth=0&chromeless=1"
+        ];
+
+        // Leemos si la URL tiene el parámetro que armamos
+        const urlParams = new URLSearchParams(window.location.search);
+        const tab = urlParams.get('tab');
+
+        if (tab === 'licitaciones') {
+            // Si toca Licitaciones: programamos la vuelta a Presentismo en 30 seg
+            setTimeout(() => {
+                window.location.href = window.location.origin + window.location.pathname + "?tab=presentismo";
+            }, 30000);
+            
+            // Y nos vamos YA MISMO a la URL real de Power BI de Licitaciones
+            window.location.href = urls[1];
+        } else {
+            // Por defecto (Presentismo): programamos la ida a Licitaciones en 30 seg
+            setTimeout(() => {
+                window.location.href = window.location.origin + window.location.pathname + "?tab=licitaciones";
+            }, 30000);
+            
+            // Y nos vamos YA MISMO a la URL real de Power BI de Presentismo
+            window.location.href = urls[0];
+        }
+    </script>
+
+</body>
+</html>
